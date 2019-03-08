@@ -44,14 +44,16 @@ router.delete('/', (req, res, next) => {
     return results[0]
   })
   .then(cat => {
-    console.log(cat.name)
+    if (!cat) {
+      return res.json("Out of Cats")
+    }
     return Cat.findOneAndDelete({id: cat._id})
   })
-  .then( ()=> {
+  .then(()=> {
     res.sendStatus(204);
   })
   .catch(err => {
-    next(err.message);
+    next(err)
   })
 })
 

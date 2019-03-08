@@ -44,6 +44,9 @@ router.delete('/', (req, res, next) => {
     return results[0]
   })
   .then(dog => {
+    if (!dog) {
+      return res.json("Out of Dogs")
+    }
     return Dog.findOneAndDelete({id: dog._id})
   })
   .then( ()=> {
