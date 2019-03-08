@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const route = require('./route')
 
 const catData = require('./data');
 const { PORT, CLIENT_ORIGIN } = require('./config');
@@ -10,7 +11,8 @@ const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
 
 const app = express();
-console.log(catData);
+app.use(express.json());
+app.use('/api', route)
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
