@@ -45,13 +45,13 @@ router.delete('/', (req, res, next) => {
   })
   .then(cat => {
     console.log(cat.name)
-    return Cat.findOneAndDelete({name: cat.name})
+    return Cat.findOneAndDelete({id: cat._id})
   })
   .then( ()=> {
     res.sendStatus(204);
   })
   .catch(err => {
-    next(err);
+    next(err.message);
   })
 })
 

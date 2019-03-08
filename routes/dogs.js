@@ -44,16 +44,13 @@ router.delete('/', (req, res, next) => {
     return results[0]
   })
   .then(dog => {
-    console.log("ID IS: *******", dog.id)
-    console.log("_ID IS: *******", dog._id)
-    console.log("__ID IS: *******", dog.__id)
     return Dog.findOneAndDelete({id: dog._id})
   })
   .then( ()=> {
     res.sendStatus(204);
   })
   .catch(err => {
-    next(err);
+    next(err.message);
   })
 })
 
