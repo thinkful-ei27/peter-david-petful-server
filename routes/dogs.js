@@ -38,4 +38,21 @@ router.post('/', (req, res, next) => {
     });
 });
 
+router.delete('/', (req, res, next) => {
+  Dog.find()
+  .then(results => {
+    return results[0]
+  })
+  .then(dog => {
+    console.log(dog.name)
+    return Dog.findOneAndDelete({name: dog.name})
+  })
+  .then( ()=> {
+    res.sendStatus(204);
+  })
+  .catch(err => {
+    next(err);
+  })
+})
+
 module.exports = router;

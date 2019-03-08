@@ -30,12 +30,29 @@ router.post('/', (req, res, next) => {
     age,
     breed,
     story
-  };
+  }
 
   Cat.create(catObject)
     .then(result => {
       res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
     });
 });
+
+router.delete('/', (req, res, next) => {
+  Cat.find()
+  .then(results => {
+    return results[0]
+  })
+  .then(cat => {
+    console.log(cat.name)
+    return Cat.findOneAndDelete({name: cat.name})
+  })
+  .then( ()=> {
+    res.sendStatus(204);
+  })
+  .catch(err => {
+    next(err);
+  })
+})
 
 module.exports = router;
