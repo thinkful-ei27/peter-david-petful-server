@@ -11,6 +11,11 @@ const { dbConnect } = require('./db-mongoose');
 
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
 app.use('/api/cats', catsRouter);
 app.use('/api/dogs', dogsRouter);
 
@@ -21,11 +26,7 @@ app.use(
   })
 );
 
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN
-  })
-);
+
 
 function runServer(port = PORT) {
   const server = app
