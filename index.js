@@ -3,16 +3,17 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const route = require('./route')
+const catsRouter = require('./routes/cats');
+const dogsRouter = require('./routes/dogs');
 
-const catData = require('./data');
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
-// const {dbConnect} = require('./db-knex');
 
 const app = express();
 app.use(express.json());
-app.use('/api', route)
+app.use('/api/cats', catsRouter);
+app.use('/api/dogs', dogsRouter);
+
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {

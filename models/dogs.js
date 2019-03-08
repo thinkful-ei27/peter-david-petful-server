@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   age: {type: String, require: true},
   breed: {type: String, require: true},
   story: {type: String, require: true}
-})
+});
 
 
-module.exports = mongoose.model('Pet', schema);
+module.exports = mongoose.model('Dog', schema);
