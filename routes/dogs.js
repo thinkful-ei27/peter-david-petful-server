@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const Queue = require('../queue')
+const {Queue, peek, display} = require('../queue')
 const { dogData } = require('../data');
 const router = express.Router();
 
@@ -13,7 +13,8 @@ for (let dog of dogData) {
 
 
 router.get('/', (req, res, next) => {
-  return res.json(dogs.peek());
+  display(dogs)
+  return res.json(peek(dogs));
 });
 
 router.post('/', (req, res, next) => {

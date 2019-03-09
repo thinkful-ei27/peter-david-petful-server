@@ -55,4 +55,4 @@ const display = queue => {
 
 
 
-module.exports = Queue
+module.exports = {Queue, peek, display}
