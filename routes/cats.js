@@ -4,10 +4,9 @@ const express = require('express');
 const Queue = require('../queue')
 const { catData } = require('../data');
 const router = express.Router();
-
 const cats = new Queue()
 
-for (cat of catData) {
+for (let cat of catData) {
   cats.enqueue(cat)
 }
 

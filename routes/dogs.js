@@ -2,12 +2,13 @@
 
 const express = require('express');
 const Queue = require('../queue')
+const { dogData } = require('../data');
 const router = express.Router();
 
 const dogs = new Queue()
 
-for (dog of dogData) {
-  dogs.enqueue(cat)
+for (let dog of dogData) {
+  dogs.enqueue(dog)
 }
 
 
