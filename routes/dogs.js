@@ -37,9 +37,6 @@ router.post('/', (req, res, next) => {
 router.delete('/', (req, res, next) => {
   dogs.dequeue();
   return res.sendStatus(204)
-  .catch(err => {
-    next(err.message);
-  })
 })
 
 module.exports = router;
