@@ -1,9 +1,7 @@
 'use strict';
 
 const express = require('express');
-const mongoose = require('mongoose');
-const { dogData } = require('../data');
-const Dog = require('../models/dogs');
+const Queue = require('../queue')
 const router = express.Router();
 
 const dogs = new Queue()

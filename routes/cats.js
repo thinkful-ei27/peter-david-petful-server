@@ -1,9 +1,8 @@
 'use strict';
 
 const express = require('express');
-const mongoose = require('mongoose');
+const Queue = require('../queue')
 const { catData } = require('../data');
-const Cat = require('../models/cats');
 const router = express.Router();
 
 const cats = new Queue()
@@ -14,21 +13,14 @@ for (cat of catData) {
 
 
 router.get('/', (req, res, next) => {
-  Cat.find()
-    .then(results => {
-      res.json(results[0]);
-    })
-    .catch(err => {
-      console.log(err.message);
-      next(err);
-    });
+  return res.json(cats.peek());
 });
 
 router.post('/', (req, res, next) => {
   console.log(req.body);
   const {imageURL, imageDescription, name, sex,  age, breed, story} = req.body;
 
-  const catObject = {
+  const dogObject = {
     imageURL,
     imageDescription,
     name,
@@ -36,30 +28,16 @@ router.post('/', (req, res, next) => {
     age,
     breed,
     story
-  }
+  };
 
-  Cat.create(catObject)
-    .then(result => {
-      res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
-    });
+  cats.enqueue(dogObject)
 });
 
 router.delete('/', (req, res, next) => {
-  Cat.find()
-  .then(results => {
-    return results[0]
-  })
-  .then(cat => {
-    if (!cat) {
-      return res.json("Out of Cats")
-    }
-    return Cat.findOneAndDelete({id: cat._id})
-  })
-  .then(()=> {
-    res.sendStatus(204);
-  })
+  cats.dequeue();
+  return res.sendStatus(204)
   .catch(err => {
-    next(err)
+    next(err.message);
   })
 })
 
