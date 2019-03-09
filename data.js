@@ -45,7 +45,7 @@ const dogData = [{
   story: 'Owner Passed away'
 },
 {
-  imageURL: "https://imgur.com/qERer6Q",
+  imageURL: "https://i.imgur.com/qERer6Q.jpg",
   imageDescription: "a sleeping dog",
   name: "Thor",
   sex: "Male",
@@ -54,7 +54,7 @@ const dogData = [{
   story: "One big Puppo" 
 },
 {
-  imageURL: "https://imgur.com/a/ey90aXQ",
+  imageURL: "https://i.imgur.com/LlecF03.jpg",
   imageDescription: "a playful puppy",
   name: "Grace",
   sex: "Female",
