@@ -6,6 +6,12 @@ const { catData } = require('../data');
 const Cat = require('../models/cats');
 const router = express.Router();
 
+const cats = new Queue()
+
+for (cat of catData) {
+  cats.enqueue(cat)
+}
+
 
 router.get('/', (req, res, next) => {
   Cat.find()

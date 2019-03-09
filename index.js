@@ -5,9 +5,22 @@ const cors = require('cors');
 const morgan = require('morgan');
 const catsRouter = require('./routes/cats');
 const dogsRouter = require('./routes/dogs');
-
+const {dogsQueue, catsQueue} = require('./queue')
+const {catData, dogData} = require('./data')
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
+
+
+const dogs = new Queue()
+const cats = new Queue()
+
+for (cat of catData) {
+  cats.enqueue(cat)
+}
+
+for (dog of dogData) {
+  dogs.enqueue(cat)
+}
 
 const app = express();
 app.use(express.json());

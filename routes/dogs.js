@@ -6,16 +6,15 @@ const { dogData } = require('../data');
 const Dog = require('../models/dogs');
 const router = express.Router();
 
+const dogs = new Queue()
+
+for (dog of dogData) {
+  dogs.enqueue(cat)
+}
+
 
 router.get('/', (req, res, next) => {
-  Dog.find()
-    .then(results => {
-      res.json(results[0]);
-    })
-    .catch(err => {
-      console.log(err.message);
-      next(err);
-    });
+  return res.json(dogs.peek());
 });
 
 router.post('/', (req, res, next) => {
@@ -32,26 +31,12 @@ router.post('/', (req, res, next) => {
     story
   };
 
-  Dog.create(dogObject)
-    .then(result => {
-      res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
-    });
+  dogs.enqueue(dogObject)
 });
 
 router.delete('/', (req, res, next) => {
-  Dog.find()
-  .then(results => {
-    return results[0]
-  })
-  .then(dog => {
-    if (!dog) {
-      return res.json("Out of Dogs")
-    }
-    return Dog.findOneAndDelete({id: dog._id})
-  })
-  .then( ()=> {
-    res.sendStatus(204);
-  })
+  dogs.dequeue();
+  return res.sendStatus(204)
   .catch(err => {
     next(err.message);
   })
